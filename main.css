@@ -58,6 +58,9 @@ html {
 /* ------------------------------------------------------------------------------------------------------------------------- */
 
 .content {
-    text-align: center; 
+    display: block;
+    text-align: left; 
     padding-top: 100px;
+    color: black;
+    text-decoration: none;
 }
