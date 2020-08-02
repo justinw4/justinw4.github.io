@@ -20,3 +20,35 @@
     position: fixed;
     z-index: 2; 
 }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 40px;
+    text-decoration: none; 
+}
+
+.current {
+    background-color: lightgreen;
+    color: black; 
+}
+
+li a:hover {
+    background-color: lightgray;
+}
+
+html {
+    scroll-behavior: smooth;
+}
