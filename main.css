@@ -58,7 +58,7 @@ html {
 /* ------------------------------------------------------------------------------------------------------------------------- */
 
 .sections {
-    padding-top: 80px;
+    padding-top: 100px;
     display: grid;
     grid-template-columns: 70% 30%;
 }
@@ -67,10 +67,11 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     background-color: blue;
     padding: 10px 10px;
     height: 100%;
+    width: auto;
     text-align: left;
     color: black;
 }
