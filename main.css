@@ -64,12 +64,12 @@ html {
 }
 
 .annotation {
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
 
-    background-color: blue;
-    padding: 10px 10px;
+    background-color: lightblue;
+    padding: 20px 20px;
     height: 100%;
     width: auto;
     text-align: left;
