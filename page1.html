@@ -27,7 +27,7 @@
                     var width = 1000 - (2 * margin);
                     var height = 600 - (2 * margin); 
 
-                    const data = await d3.csv("HomerunStats.csv"); 
+                    const data = d3.csv("HomerunStats.csv"); 
                     
                     console.log("Column Headers", data.columns);
 
