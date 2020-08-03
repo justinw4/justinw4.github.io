@@ -29,10 +29,11 @@
                             var width = 1000 - (2 * margin);
                             var height = 600 - (2 * margin); 
                             
-                            console.log("Start v1.29");
+                            console.log("Start v1.30");
 
                             // Setup the data
-                            const data = d3.csv("HomerunStats.csv", function(d) { return { date : d.Year, value: d.Total }; }); 
+                            const data = d3.csv("HomerunStats.csv", function(d) { return { date : d.Year, value : d.Total }; }); 
+                            console.log(data.columns);
                             
                             var svg = d3.select("div#chart").append("svg").attr("width", width).attr("height", height).attr("transform","translate("+margin+","+margin+")"); 
 
@@ -40,17 +41,17 @@
                             var y = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.value; })]).range([height,0]); 
 
                             // Set up the Axis
-                            // var xAxis = d3.axisBottom(x).tickValues([1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020]).tickFormat(d3.format("~s"));
-                            // var yAxis = d3.axisLeft(y).tickValues([1000, 2000, 3000, 4000, 5000, 6000, 7000]).tickFormat(d3.format("~s")); 
+                            var xAxis = d3.axisBottom(x).tickValues([1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020]).tickFormat(d3.format("~s"));
+                            var yAxis = d3.axisLeft(y).tickValues([0, 1000, 2000, 3000, 4000, 5000, 6000, 7000]).tickFormat(d3.format("~s")); 
                             d3.select("svg").append("g")
                                 .attr("class", "axis")
                                 .attr("transform","translate("+margin+","+(height+margin)+")")
-                                .call(x); 
+                                .call(xAxis); 
 
                             d3.select("svg").append("g")
                                 .attr("class", "axis")
                                 .attr("transform","translate("+margin+","+margin+")")
-                                .call(y); 
+                                .call(yAxis); 
 
                             // Set up the Lines
                             // const lineAL = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.AmericanLeague); }); 
@@ -61,9 +62,9 @@
                             // svg.append("line").datum(data).attr("fill", "none").attr("stroke","red").attr("stroke-width", 1.5).attr("d", function() { return lineAL; });
                             // svg.append("line").datum(data).attr("fill", "none").attr("stroke","blue").attr("stroke-width", 1.5).attr("d", function() { return lineNL; });
                             svg.append("line").datum(data).attr("fill", "none").attr("stroke","black").attr("stroke-width", 1.5)
-                                .attr("d", function() { return d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.Total); }); });
+                                .attr("d", function() { return d3.line().x(function(d) { return x(d.date); }).y(function(d) { return y(d.value); }); });
 
-                            console.log("Done v1.29");
+                            console.log("Done v1.30");
                         }
                     </script>
                 </body>
