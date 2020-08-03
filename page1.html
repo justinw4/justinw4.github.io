@@ -56,15 +56,25 @@
 
                         // Draw the Lines
                         svg.selectAll("line").data(sumstat).enter().append("path").attr("d", function(d) {
-                            return d3.line().x(function(d) { return x(d.Year()); }).y(function(d) { return y((+d.n)); }) (dvalues)
-                        })
-                    }
+                            return d3.line().x(function(d) { return x(d.Year()); }).y(function(d) { return y((+d.n)); }); 
+                        });
+                    });
                 </script>
             </div>
 
             <div class="annotation">
                 <h1>Homeruns</h1>
-                <p>The number of homeruns hit in major league baseball has been relatively consistent except for two distinct eras.</p>
+                <p>Throughout past 40 years of baseball, there have been two distinct maximums when it comes to homeruns hit in a season. 
+                    One of these took place during an era of steroid use, where athletes using performance enhancing drugs to improve their strength. 
+                    Players such as Mark McGwire, Sammy Sosa, and Barry Bonds used these Performance Enhancing Drugs (PEDs) to lead the league in homeruns for many years. 
+                    Many other players were found to have used steroids during this era as well, which explains the increase in homeruns during the time period of 1995 to 2005. 
+                    The number of homeruns seems to drop after this period, due to the MLB cracking down on the use of PEDs, but there now exist a spike like no other in homeruns occuring within the past couple of years. 
+                    What's causing this? It can't be steroid use due to the increase in regulatory measures. 
+                    This phenomena has lead many players to believe that the creation of baseballs have changed in order to increase the number of homeruns and thus make the game more popular amongst fans. 
+                    Homeruns are exciting, but is the MLB really juicing the baseballs in order to make the sport more exciting? 
+                    Or have players mindset at the plate changed over the years, to the point where they are swinging for the fences rather than swinging for contact? 
+                    Let's look further into this by looking at the leagues batting averages over the past 35 years.  
+                </p>
             </div>
         </div>
     </body>
