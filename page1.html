@@ -54,24 +54,34 @@
                         .style("border", "solid").style("border-width", "2px").style("border-radius", "5px").style("padding", "5px").attr("z-index",5);
 
                         var mouseover = function(d) {
-                            Tooltip.style("opacity", 1);
-                        }; 
+                            Tooltip.style("opacity", 1)
+                        }
 
                         var mousemove = function(d) {
-                            Tooltip.html("Year: " + d.Year + "\n" + "# of Homeruns: " + d.Homeruns).style("left", (d3.mouse(this)[0]+70) + "px").style("top", (d3.mouse(this)[1]) + "px");
-                        };
+                            Tooltip.html("Year: " + d.Year + "\n" + "# of Homeruns: " + d.Homeruns).style("left", (d3.mouse(this)[0]+70) + "px").style("top", (d3.mouse(this)[1]) + "px")
+                        }
 
                         var mouseleave = function(d) {
-                            Tooltip.style("opacity", 0);
-                        };
+                            Tooltip.style("opacity", 0)
+                        }
                         
                         // Individual data points
                         svg.append("g").selectAll("dot").data(data).enter().append("circle")
-                                .attr("cx", function(d) { return x(d.Year) })
-                                .attr("cy", function(d) { return y(d.Homeruns) })
-                                .attr("r", 5)
-                                .attr("stroke","lightcoral").attr("fill","lightcoral")
-                                .on("mouseover", mouseover).on("mousemove", mousemove).on("mouseleave", mouseleave);
+                            .attr("cx", function(d) { return x(d.Year) })
+                            .attr("cy", function(d) { return y(d.Homeruns) })
+                            .attr("r", 5)
+                            .attr("stroke","lightcoral").attr("fill","lightcoral")
+                            .on("mouseover", mouseover).on("mousemove", mousemove).on("mouseleave", mouseleave);
+
+                        // Add title and labels to x axis and y axis
+                        svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin / 2)).attr("text-anchor", "middle").style("font-size", "24px") 
+                            .style("text-decoration", "bold").text("# of Homeruns vs Year Graph");
+
+                        svg.append("text").attr("transform","translate("+(width/2)+","+(height+margin+20)+")").style("text-anchor", "middle").text("Year");
+
+                        svg.append("text").attr("transform", "rotate(-90)").attr("y", 0 - margin).attr("x",0 - (height / 2))
+                            .attr("dy", "1em").style("text-anchor", "middle").text("# of Homeruns"); 
+
                     });
 
                     console.log("fixed 3");
