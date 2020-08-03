@@ -36,7 +36,7 @@
 
                     // Tooltip
                     var Tooltip = svg.append("div").style("opacity", 0).attr("class", "tooltip").style("background-color", "lightblue")
-                    .style("border", "solid").style("border-width", "40px").style("border-radius", "80px").style("padding", "5px");
+                    .style("border", "solid").style("border-width", "40px").style("border-radius", "80px").style("padding", "5px").style("z-index", "10");
 
                     var mouseover = function(d) {
                         Tooltip.style("opacity", 1);
@@ -57,7 +57,7 @@
                             .on("mouseover", mouseover).on("mousemove", mousemove).on("mouseleave", mouseleave);
                 });
 
-                console.log("fixed 2");
+                console.log("fixed 3");
             }    
         </script>    
     </body>
