@@ -27,12 +27,12 @@
                     var width = 1000 - (2 * margin);
                     var height = 600 - (2 * margin); 
                     
-                    console.log("Start v1.40");
+                    console.log("Start v1.41");
 
                     var xScale = d3.scaleLinear().domain([0,35]).range([0, width]);
                     var yScale = d3.scaleLinear().domain([0, 7000]).range([height, 0]);
 
-                    var line = d3.line().x(function(d) { return xScale(d.Year); }).y(function(d) { return yScale(d.Homeruns); });
+                    var line = d3.line().x(function(d) { console.log(xScale(d.year)); return xScale(d.Year); }).y(function(d) { console.log(yScale(d.Homeruns)); return yScale(d.Homeruns); });
 
                     var dataset = d3.csv("Homeruns.csv");
 
