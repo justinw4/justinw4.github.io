@@ -43,8 +43,8 @@
                         const lineTotal = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.Total); });
 
                         // Set up the Axis
-                        var xAxis = d3.axisBottom(x).tickValues([1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020]).tickFormat(d3.format("%f"));
-                        var yAxis = d3.axisLeft(y).tickValues([1000, 2000, 3000, 4000, 5000, 6000, 7000]).tickFormat(d3.format("%f")); 
+                        var xAxis = d3.axisBottom(x).tickValues([1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020]).tickFormat(d3.format("~s"));
+                        var yAxis = d3.axisLeft(y).tickValues([1000, 2000, 3000, 4000, 5000, 6000, 7000]).tickFormat(d3.format("~s")); 
                         d3.select("svg").append("g")
                             .attr("class", "axis")
                             .attr("transform","translate("+margin+","+margin+")")
