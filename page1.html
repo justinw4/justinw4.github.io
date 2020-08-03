@@ -18,33 +18,43 @@
                 
                 var svg = d3.select("svg#chart").append("svg").attr("width", width).attr("height", height).append("g").attr("transform","translate("+margin+","+margin+")"); 
                 
-                var x = d3.scaleLinear().domain([1985,2019]).range([0,width]);
+                var x = d3.scaleLinear().domain([1985,2020]).range([0,width]);
                 var y = d3.scaleLinear().domain([0,7000]).range([height,0]); 
 
-                var xAxis = d3.axisBottom(x).tickValues([1985,1990,1995,2000,2005,2010,2015,2019]).tickFormat(d3.format(",.4r"));
-                var yAxis = d3.axisLeft(y).tickValues([0,1000,2000,3000,4000,5000,6000,7000]).tickFormat(d3.format("~s"));
+                var xAxis = d3.axisBottom(x).tickValues([1985,1990,1995,2000,2005,2010,2015,2020]).tickFormat(d3.format(".4r"));
+                var yAxis = d3.axisLeft(y).tickValues([0,1000,2000,3000,4000,5000,6000,7000]).tickFormat(d3.format(".4r"));
 
                 // Draw Axis
                 d3.select("svg").append("g").attr("transform","translate("+margin+","+margin+")").call(yAxis); 
                 d3.select("svg").append("g").attr("transform","translate("+margin+","+(height+margin)+")").call(xAxis); 
 
-                // // Draw Scatter Plot
-                // svg.selectAll("circle").data(data).enter().append("circle")
-                //         .attr("cx",function(d) { return x(d.Year); })
-                //         .attr("cy",function(d) { return y(d.Homeruns); })
-                //         .attr("r", 3); 
-
+                // Data
                 d3.csv("Homeruns.csv").then(function(data) {
                     // Line
                     svg.append("path").datum(data).attr("class","line").attr("fill","none").attr("stroke","lightcoral").attr("stroke-width",2)
                         .attr("d",d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.Homeruns); })); 
 
+                    // Tooltip
+                    var Tooltip = d3.select("#my_dataviz").append("div").style("opacity", 0).attr("class", "tooltip").style("background-color", "lightblue")
+                    .style("border", "solid").style("border-width", "2px").style("border-radius", "5px").style("padding", "5px");
+
+                    var mouseover = function(d) {
+                        Tooltip.style("opacity", 1);
+                    }
+                    var mousemove = function(d) {
+                        Tooltip.html("Year: " + d.Year + "\n# of Homeruns: " + d.Homeruns).style("left", (d3.mouse(this)[0]+70) + "px").style("top", (d3.mouse(this)[1]) + "px");
+                    }
+                    var mouseleave = function(d) {
+                        Tooltip.style("opacity", 0);
+                    }
+                    
                     // Individual data points
                     svg.append("g").selectAll("dot").data(data).enter().append("circle")
                             .attr("cx", function(d) { return x(d.Year) })
                             .attr("cy", function(d) { return y(d.Homeruns) })
                             .attr("r", 5)
-                            .attr("stroke","lightcoral").attr("fill","lightcoral");
+                            .attr("stroke","lightcoral").attr("fill","lightcoral")
+                            .on("mouseover", mouseover).on("mousemove", mousemove).on("mouseleave", mouseleave);
                 });
             }    
         </script>    
