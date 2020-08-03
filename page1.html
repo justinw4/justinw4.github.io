@@ -35,7 +35,7 @@
                         .attr("d",d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.Homeruns); })); 
 
                     // Tooltip
-                    var Tooltip = d3.select("#my_dataviz").append("div").style("opacity", 0).attr("class", "tooltip").style("background-color", "lightblue")
+                    var Tooltip = svg.append("div").style("opacity", 0).attr("class", "tooltip").style("background-color", "lightblue")
                     .style("border", "solid").style("border-width", "2px").style("border-radius", "5px").style("padding", "5px");
 
                     var mouseover = function(d) {
@@ -57,7 +57,7 @@
                             .on("mouseover", mouseover).on("mousemove", mousemove).on("mouseleave", mouseleave);
                 });
 
-                console.log("updated");
+                console.log("fixed");
             }    
         </script>    
     </body>
