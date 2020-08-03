@@ -28,10 +28,12 @@
                     var height = 600 - (2 * margin); 
 
                     const data = await d3.csv("HomerunStats.csv"); 
+                    
+                    console.log("Column Headers", data.columns);
 
                     var svg = d3.select("div#chart").append("svg").attr("width", width).attr("height", height).attr("transform","translate("+margin+","+margin+")"); 
-                    var x = d3.scaleLinear().domain([1985, 2020]).range([0,width]);
-                    var y = d3.scaleLinear().domain([1000, 7000]).range([height,0]); 
+                    var xScale = d3.scaleLinear().domain([1985, 2020]).range([0,width]);
+                    var yScale = d3.scaleLinear().domain([1000, 7000]).range([height,0]); 
 
                     // Set up the Lines
                     var lineAL = d3.line()
