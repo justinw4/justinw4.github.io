@@ -6,6 +6,7 @@
     </head>
     <body onload='init()'>
         <svg id="chart" width=1000 height=600></svg>
+        <style> .myCircle:hover { stroke: black; fill: black; } </style>
         <script>
             async function init() {
                 // Initialize Variables
@@ -36,7 +37,7 @@
 
                     // Tooltip
                     var Tooltip = svg.append("div").style("opacity", 0).attr("class", "tooltip").style("background-color", "lightblue")
-                    .style("border", "solid").style("border-width", "40px").style("border-radius", "80px").style("padding", "5px").style("z-index", "10");
+                    .style("border", "solid").style("border-width", "2px").style("border-radius", "5px").style("padding", "5px");
 
                     var mouseover = function(d) {
                         Tooltip.style("opacity", 1);
