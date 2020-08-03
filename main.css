@@ -1,13 +1,11 @@
 /* Applies to everything */
 * {
     margin: 0;
-    padding: 0;
+    padding: 40;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
 
-.svg {
-    padding-top: 80px;
-    padding-bottom: 80px;
-    background-color: blue;
+body {
+    background-color: lightblue; 
 }
