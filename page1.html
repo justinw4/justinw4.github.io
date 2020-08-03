@@ -56,7 +56,8 @@
 
                         // Draw the Lines
                         svg.selectAll("line").data(sumstat).enter().append("path").attr("d", function(d) {
-                            return d3.line().x(function(d) { return x(d.Year()); }).y(function(d) { return y((+d.n)); });
+                            return d3.line().x(function(d) { return x(d.Year()); }).y(function(d) { return y((+d.n)); }) (dvalues)
+                        })
                     }
                 </script>
             </div>
