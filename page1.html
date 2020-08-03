@@ -25,7 +25,7 @@
                     async function init() {
 
                         // Initialize variables
-                        var margin = 40;
+                        var margin = 80;
                         var width = 1000 - (2 * margin);
                         var height = 600 - (2 * margin); 
 
@@ -34,7 +34,7 @@
                         console.log("Column Headers", data.columns);
 
                         var svg = d3.select("div#chart").append("svg").attr("width", width).attr("height", height).attr("transform","translate("+margin+","+margin+")"); 
-                        var x = d3.scaleLinear().domain([1985, 2020]).range([0,width]);
+                        var x = d3.scaleTime().domain([1985, 2020]).range([0,width]);
                         var y = d3.scaleLinear().domain([1000, 7000]).range([height,0]); 
 
                         // Set up the Lines
