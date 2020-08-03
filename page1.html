@@ -30,7 +30,21 @@
                             var width = 1000 - (2 * margin);
                             var height = 600 - (2 * margin); 
 
+                            // Setup the data
                             const data = await d3.csv("HomerunStats.csv"); 
+                            data.then(function(data) {
+                                const slices = data.columns.slice(1).map(function(id) {
+                                    return {
+                                        id: id, 
+                                        values: data.map(function(d) {
+                                            return {
+                                                date: timeConv(d.Year),
+                                                measurement: +d[id]
+                                            };
+                                        })
+                                    };
+                                });
+                            });
                             
                             console.log("Column Headers", data.columns);
 
@@ -56,9 +70,7 @@
                                 .call(xAxis); 
 
                             // Draw the Lines
-                            svg.data(data).enter().append("path").attr("class","line").style("stroke","red").attr("d",lineAL);
-                            svg.data(data).enter().append("path").attr("class","line").style("stroke","blue").attr("d",lineNL);
-                            svg.data(data).enter().append("path").attr("class","line").attr("d",lineTotal);
+                            const lines = svg.selectAll("lines").data(slices).enter().append("g").append("path").attr("d", function(d) { return line(d.values); }); 
                         }
                     </script>
                 </body>
