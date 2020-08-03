@@ -4,61 +4,37 @@
         <link rel="stylesheet" type="text/css" href="main.css" />
         <script src = "d3.min.js"></script>
     </head>
-    <body>
-        <!-- Navigation Bar -->
-        <div class="navbar">
-            <div class="container">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="page1.html">Page 1</a></li>
-                    <li><a href="page2.html">Page 2</a></li>
-                    <li><a href="page3.html">Page 3</a></li>
-                </ul>
-            </div>
-        </div>
+    <body onload='init()'>
+        <svg width=1000 height=600></svg>
+        <script>
+            async function init() {
+                // Initialize Variables
+                var margin = 50;
+                var width = 900;
+                var height = 500; 
+                
+                // Get the data
+                data = await d3.csv("Homeruns.csv"); 
+                
+                var svg = d3.select("svg").attr("width", width).attr("height", height).append("g").attr("transform","translate("+margin+","+margin+")"); 
+                
+                var x = d3.scaleLinear().domain([1985,2020]).range([0,width]);
+                var y = d3.scaleLinear().domain([1985,2020]).range([height,0]); 
 
-        <!-- Webpage Content -->
-        <div class="sections">
-            <div id="chart" class="chart">
-                <meta charset="utf-8">
-                <svg width=1000 height=600></svg>
-                <script>
-                    // Initialize variables
-                    var margin = 40;
-                    var width = 900;
-                    var height = 500; 
-                    
-                    console.log("Start v1.70");
+                var xAxis = d3.axisBottom(x).tickValues([1985,1990,1995,2000,2005,2010,2015,2020]).tickFormat("~s");
+                var yAxis = d3.axisLeft(y).tickValues([0,1000,2000,3000,4000,5000,6000,7000]).tickFormat("~s");
 
-                    var xScale = d3.scaleLinear().domain([1985, 2020]).range([0, width]);
-                    var yScale = d3.scaleLinear().domain([1000,7000]).range([height, 0]);
+                // Draw Scatter Plot
+                svg.selectAll("circle").data(data).enter().append("circle")
+                        .attr("cx",function(d) { return x(d.Year); })
+                        .attr("cy",function(d) { return y(d.Homeruns); })
+                        .attr("r", 5); 
+                
+                // Draw Axis
+                d3.select("svg").append("g").attr("transform","translate("+margin+","+margin+")").call(yAxis); 
+                d3.select("svg").append("g").attr("transform","translate("+margin+","+(height+margin)+")").call(xAxis); 
 
-                    var svg = d3.select("svg").attr("width", width).attr("height", height).append("g").attr("transform","translate("+margin+","+margin+")");
-
-                    svg.append("g").attr("transform","translate("+margin+","+margin+")").call(d3.axisLeft(yScale));
-                    svg.append("g").attr("transform","translate("+margin+","+height+margin+")").call(d3.axisBottom(xScale));
-
-                    d3.csv("Homeruns.csv").then(function(data) {
-                        svg.append("path").data(data).attr("class", "line").attr("d", d3.line().x(function(d) { return xScale(d.Year); }).y(function(d) { return yScale(d.Homeruns); }));
-                    }); 
-
-                </script>
-            </div>
-
-            <div class="annotation">
-                <h1>Homeruns</h1>
-                <p>Throughout the past 35 years of baseball, there have been two distinct maximums when it comes to homeruns hit in a season. 
-                    One of these took place during an era of steroid use, where athletes using performance enhancing drugs to improve their strength. 
-                    Players such as Mark McGwire, Sammy Sosa, and Barry Bonds used these Performance Enhancing Drugs (PEDs) to lead the league in homeruns for many years. 
-                    Many other players were found to have used steroids during this era as well, which explains the increase in homeruns during the time period of 1995 to 2005. 
-                    The number of homeruns seems to drop after this period, due to the MLB cracking down on the use of PEDs, but there now exist a spike like no other in homeruns occuring within the past couple of years. 
-                    What's causing this? It can't be steroid use due to the increase in regulatory measures. 
-                    This phenomena has lead many players to believe that the creation of baseballs have changed in order to increase the number of homeruns and thus make the game more popular amongst fans. 
-                    Homeruns are exciting, but is the MLB really juicing the baseballs in order to make the sport more exciting? 
-                    Or have players mindset at the plate changed over the years, to the point where they are swinging for the fences rather than swinging for contact? 
-                    Let's look further into this by looking at the leagues batting averages over the past 35 years.  
-                </p>
-            </div>
-        </div>
+            }    
+        </script>     
     </body>
 </html>
