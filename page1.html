@@ -24,12 +24,12 @@
                 <script>
                     // Initialize variables
                     var margin = 80;
-                    var width = 800 - (2 * margin);
-                    var height = 500 - (2 * margin); 
+                    var width = 1000 - (2 * margin);
+                    var height = 600 - (2 * margin); 
                     
-                    console.log("Start v1.37");
+                    console.log("Start v1.39");
 
-                    var xScale = d3.scaleLinear().domain([1985, 2020]).range([0, width]);
+                    var xScale = d3.scaleLinear().domain([0,35]).range([0, width]);
                     var yScale = d3.scaleLinear().domain([0, 7000]).range([height, 0]);
 
                     var line = d3.line().x(function(d,i) { return xScale(d.Year[i]); }).y(function(d,i) { return yScale(d.Homeruns[i]); });
@@ -37,8 +37,8 @@
                     var dataset = d3.csv("Homeruns.csv");
 
                     var svg = d3.select("div#chart").append("svg").attr("width", width).attr("height", height).append("g").attr("transform","translate("+margin+","+margin+")");
-                    svg.append("g").attr("class", "axis").attr("transform","translate(0,"+height+")").call(d3.axisBottom(xScale));
-                    svg.append("g").attr("class", "axis").call(d3.axisLeft(yScale)); 
+                    svg.append("g").attr("class", "axis").attr("transform","translate("+margin+","+(height+margin)+")").call(d3.axisBottom(xScale));
+                    svg.append("g").attr("class", "axis").attr("transform","translate("+margin+","+margin+")").call(d3.axisLeft(yScale)); 
 
                     svg.append("path").datum(dataset).attr("class","line").attr("d",line);
 
