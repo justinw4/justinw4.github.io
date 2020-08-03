@@ -67,7 +67,7 @@
                             .call(xAxis); 
 
                         // Draw the Lines
-                        const lines = svg.selectAll("lines").data(slices).enter().append("g").append("path").attr("d", function(d) { return line(d.values); }); 
+                        const lines = svg.selectAll("lines").data(slices).enter().append("g").append("path").attr("d", function(d) { return d3.line(d.values); }); 
                     }); 
                 </script>
             </div>
