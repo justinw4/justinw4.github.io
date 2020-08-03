@@ -32,30 +32,31 @@
                     const data = d3.csv("HomerunStats.csv", function(data) { 
                         var svg = d3.select("div#chart").append("svg").attr("width", width).attr("height", height).attr("transform","translate("+margin+","+margin+")"); 
 
-                        var x = d3.scaleLinear().domain([1985, 2020]).range([0,width]);
-                        var y = d3.scaleLinear().domain([0, 7000]).range([height,0]); 
+                        var x = d3.scaleTime().domain(d3.extent(data, function(d) { return d.Year; })).range([0,width]);
+                        var y = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.value; })]).range([height,0]); 
+
+                        // Set up the Axis
+                        // var xAxis = d3.axisBottom(x).tickValues([1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020]).tickFormat(d3.format("~s"));
+                        // var yAxis = d3.axisLeft(y).tickValues([1000, 2000, 3000, 4000, 5000, 6000, 7000]).tickFormat(d3.format("~s")); 
+                        d3.select("svg").append("g")
+                            .attr("class", "axis")
+                            .attr("transform","translate("+margin+","+(height+margin)+")")
+                            .call(x); 
+
+                        d3.select("svg").append("g")
+                            .attr("class", "axis")
+                            .attr("transform","translate("+margin+","+margin+")")
+                            .call(y); 
 
                         // Set up the Lines
                         const lineAL = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.AmericanLeague); }); 
                         const lineNL = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.NationalLeague); });
                         const lineTotal = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.Total); });
 
-                        // Set up the Axis
-                        var xAxis = d3.axisBottom(x).tickValues([1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020]).tickFormat(d3.format("~s"));
-                        var yAxis = d3.axisLeft(y).tickValues([1000, 2000, 3000, 4000, 5000, 6000, 7000]).tickFormat(d3.format("~s")); 
-                        d3.select("svg").append("g")
-                            .attr("class", "axis")
-                            .attr("transform","translate("+margin+","+margin+")")
-                            .call(yAxis); 
-                            
-                        d3.select("svg").append("g")
-                            .attr("transform","translate("+margin+","+(height+margin)+")")
-                            .call(xAxis); 
-
                         // Draw the Lines
-                        svg.select("line").data(data).enter().append("path").style("color","red").attr("d", function(d) { return lineAL; });
-                        svg.select("line").data(data).enter().append("path").style("color","blue").attr("d", function(d) { return lineNL; });
-                        svg.select("line").data(data).enter().append("path").style("color","black").attr("d", function(d) { return lineTotal; });
+                        svg.append("line").datum(data).attr("fill", "none").attr("stroke","red").attr("stroke-width", 1.5).attr("d", function() { return lineAL; });
+                        svg.append("line").datum(data).attr("fill", "none").attr("stroke","blue").attr("stroke-width", 1.5).attr("d", function() { return lineNL; });
+                        svg.append("line").datum(data).attr("fill", "none").attr("stroke","black").attr("stroke-width", 1.5).attr("d", function() { return lineTotal; });
                     });
                 </script>
             </div>
