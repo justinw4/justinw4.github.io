@@ -27,10 +27,8 @@
                     var margin = 40;
                     var width = 900;
                     var height = 500; 
-
-                    var parseTime = d3.timeParse("%y");
                     
-                    console.log("Start v1.51");
+                    console.log("Start v1.52");
 
                     var x = d3.scaleTime().range([0, width]);
                     var y = d3.scaleLinear().range([height, 0]);
@@ -38,18 +36,10 @@
                     var lineTotal = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.Homeruns); });
                     var svg = d3.select("svg").attr("width", width).attr("height", height).append("g").attr("transform","translate("+margin+","+margin+")");
 
-                    var data = d3.csv("Homeruns.csv").then(function(data) {
-
-                        data.forEach(function(d) {
-                            d.Year = parseTime(d.Year);
-                            d.Homeruns = +d.Homeruns;
-                        });
+                    d3.csv("Homeruns.csv").then(function(data) {
 
                         x.domain(d3.extent(data, function(d) { return d.Year; }));
-                        console.log(x.domain);
                         y.domain([0, d3.max(data, function(d) { return d.Homeruns; })]);
-                        console.log(y.domain);
-
 
                         console.log(data);
                         svg.append("path").data([data]).attr("class", "line").attr("d", lineTotal);
