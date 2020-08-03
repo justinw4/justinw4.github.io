@@ -22,13 +22,13 @@
             <div class="chart">
                 <style> circle {fill: lightblue; stroke: black;} </style>
                 <body onload='init()'>
-                <svg width=100% height=100%></svg>
+                <svg width=1000 height=600></svg>
                 <script>
                     async function init() {
                         // Initialize variables
-                        var margin = 20;
-                        var width = 800;
-                        var height = 800; 
+                        var margin = 40;
+                        var width = 1000 - (2 * margin);
+                        var height = 600 - (2 * margin); 
 
                         const data = await d3.csv("HomerunStats.csv"); 
 
