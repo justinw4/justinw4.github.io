@@ -36,7 +36,7 @@
                                 id: id, 
                                 values: data.map(function(d) {
                                     return {
-                                        date: timeConv(d.Year),
+                                        date: d.Year,
                                         measurement: +d[id]
                                     };
                                 })
