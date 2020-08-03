@@ -28,8 +28,8 @@
                 svg.selectAll("circle").data(data).enter().append("circle")
                         .attr("cx",function(d) { return x(d.Year); })
                         .attr("cy",function(d) { 
-                            console.log(y(d.Homeruns)); 
-                            return y(d.Homeruns); })
+                            console.log(y(d[Homeruns])); 
+                            return y(d[Homeruns]); })
                         .attr("r", 3); 
                 
                 // Draw Axis
