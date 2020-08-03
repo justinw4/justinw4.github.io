@@ -29,7 +29,7 @@
                             var width = 1000 - (2 * margin);
                             var height = 600 - (2 * margin); 
                             
-                            console.log("Start v1.28");
+                            console.log("Start v1.29");
 
                             // Setup the data
                             const data = d3.csv("HomerunStats.csv", function(d) { return { date : d.Year, value: d.Total }; }); 
@@ -55,14 +55,15 @@
                             // Set up the Lines
                             // const lineAL = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.AmericanLeague); }); 
                             // const lineNL = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.NationalLeague); });
-                            const lineTotal = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.Total); });
+                            // const lineTotal = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.Total); });
 
                             // Draw the Lines
                             // svg.append("line").datum(data).attr("fill", "none").attr("stroke","red").attr("stroke-width", 1.5).attr("d", function() { return lineAL; });
                             // svg.append("line").datum(data).attr("fill", "none").attr("stroke","blue").attr("stroke-width", 1.5).attr("d", function() { return lineNL; });
-                            svg.append("line").datum(data).attr("fill", "none").attr("stroke","black").attr("stroke-width", 1.5).attr("d", function() { return lineTotal; });
+                            svg.append("line").datum(data).attr("fill", "none").attr("stroke","black").attr("stroke-width", 1.5)
+                                .attr("d", function() { return d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.Total); }); });
 
-                            console.log("Done v1.28");
+                            console.log("Done v1.29");
                         }
                     </script>
                 </body>
