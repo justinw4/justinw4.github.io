@@ -28,7 +28,7 @@
                     var width = 900;
                     var height = 500; 
                     
-                    console.log("Start v1.53");
+                    console.log("Start v1.54");
 
                     var x = d3.scaleTime().range([0, width]);
                     var y = d3.scaleLinear().range([height, 0]);
@@ -42,7 +42,7 @@
                         y.domain([0, d3.max(data, function(d) { return d.Homeruns; })]);
 
                         console.log([data]);
-                        svg.append("path").data(data).attr("class", "line").attr("d", lineTotal);
+                        svg.append("path").data([data]).attr("class", "line").attr("d", lineTotal);
 
                         svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x));
                         svg.append("g").call(d3.axisLeft(y));
