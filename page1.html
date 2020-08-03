@@ -5,7 +5,7 @@
         <script src = "d3.min.js"></script>
     </head>
     <body onload='init()'>
-        <svg width=1000 height=600></svg>
+        <svg id="chart" width=1000 height=600></svg>
         <script>
             async function init() {
                 // Initialize Variables
@@ -16,7 +16,7 @@
                 // Get the data
                 data = await d3.csv("Homeruns.csv"); 
                 
-                var svg = d3.select("svg").attr("width", width).attr("height", height).append("g").attr("transform","translate("+margin+","+margin+")"); 
+                var svg = d3.select("svg#chart").attr("width", width).attr("height", height).append("g").attr("transform","translate("+margin+","+margin+")"); 
                 
                 var x = d3.scaleLinear().domain([1980,2020]).range([0,width]);
                 var y = d3.scaleLinear().domain([0,7000]).range([height,0]); 
@@ -34,8 +34,8 @@
                 d3.select("svg").append("g").attr("transform","translate("+margin+","+margin+")").call(yAxis); 
                 d3.select("svg").append("g").attr("transform","translate("+margin+","+(height+margin)+")").call(xAxis); 
 
-                console.log("Bottom");
+                console.log("New");
             }    
-        </script>     
+        </script>    
     </body>
 </html>
