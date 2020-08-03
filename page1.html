@@ -28,19 +28,18 @@
                     var width = 900;
                     var height = 500; 
                     
-                    console.log("Start v1.61");
+                    console.log("Start v1.62");
 
                     var xScale = d3.scaleTime().domain([1985,2020]).range([0, width]);
                     var yScale = d3.scaleLinear().domain([0,7000]).range([height, 0]);
 
-                    var lineTotal = d3.line().x(function(d) { return xScale(d.Year); }).y(function(d) { return yScale(d.Homeruns); });
                     var svg = d3.select("svg").attr("width", width).attr("height", height).append("g").attr("transform","translate("+margin+","+margin+")");
 
                     d3.select("svg").append("g").attr("transform","translate("+margin+","+margin+")").call(d3.axisLeft(yScale));
                     d3.select("svg").append("g").attr("transform","translate("+margin+","+height+margin+")").call(d3.axisBottom(xScale));
 
                     d3.csv("Homeruns.csv").then(function(data) {
-                        svg.append("path").datum([data]).attr("class", "line").attr("d", lineTotal);
+                        svg.append("path").data(data).attr("class", "line").attr("d", d3.line().x(function(d) { return xScale(d.Year); }).y(function(d) { return yScale(d.Homeruns); }));
                     }); 
 
                 </script>
