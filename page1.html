@@ -20,6 +20,7 @@
         <!-- Webpage Content -->
         <div class="sections">
             <div id="chart" class="chart">
+                <meta charset="utf-8">
                 <svg width=1000 height=600></svg>
                 <script>
                     // Initialize variables
@@ -29,7 +30,7 @@
 
                     var parseTime = d3.timeParse("%y");
                     
-                    console.log("Start v1.50");
+                    console.log("Start v1.51");
 
                     var x = d3.scaleTime().range([0, width]);
                     var y = d3.scaleLinear().range([height, 0]);
@@ -45,8 +46,12 @@
                         });
 
                         x.domain(d3.extent(data, function(d) { return d.Year; }));
+                        console.log(x.domain);
                         y.domain([0, d3.max(data, function(d) { return d.Homeruns; })]);
+                        console.log(y.domain);
 
+
+                        console.log(data);
                         svg.append("path").data([data]).attr("class", "line").attr("d", lineTotal);
 
                         svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x));
