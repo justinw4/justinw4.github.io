@@ -32,10 +32,8 @@
                     const data = d3.csv("HomerunStats.csv", function(data) { 
                         var svg = d3.select("div#chart").append("svg").attr("width", width).attr("height", height).attr("transform","translate("+margin+","+margin+")"); 
 
-                        var sumstat = d3.nest().key(function(d) { return d.name; }).entries(data); 
-
                         var x = d3.scaleLinear().domain([1985, 2020]).range([0,width]);
-                        var y = d3.scaleLinear().domain([1000, 7000]).range([height,0]); 
+                        var y = d3.scaleLinear().domain([0, 7000]).range([height,0]); 
 
                         // Set up the Lines
                         const lineAL = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.AmericanLeague); }); 
@@ -55,16 +53,16 @@
                             .call(xAxis); 
 
                         // Draw the Lines
-                        svg.selectAll("line").data(sumstat).enter().append("path").attr("d", function(d) {
-                            return d3.line().x(function(d) { return x(d.Year()); }).y(function(d) { return y((+d.n)); }); 
-                        });
+                        svg.select("line").data(data).enter().append("path").style("color","red").attr("d", function(d) { return lineAL; });
+                        svg.select("line").data(data).enter().append("path").style("color","blue").attr("d", function(d) { return lineNL; });
+                        svg.select("line").data(data).enter().append("path").style("color","black").attr("d", function(d) { return lineTotal; });
                     });
                 </script>
             </div>
 
             <div class="annotation">
                 <h1>Homeruns</h1>
-                <p>Throughout past 40 years of baseball, there have been two distinct maximums when it comes to homeruns hit in a season. 
+                <p>Throughout the past 35 years of baseball, there have been two distinct maximums when it comes to homeruns hit in a season. 
                     One of these took place during an era of steroid use, where athletes using performance enhancing drugs to improve their strength. 
                     Players such as Mark McGwire, Sammy Sosa, and Barry Bonds used these Performance Enhancing Drugs (PEDs) to lead the league in homeruns for many years. 
                     Many other players were found to have used steroids during this era as well, which explains the increase in homeruns during the time period of 1995 to 2005. 
