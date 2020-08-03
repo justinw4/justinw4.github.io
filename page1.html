@@ -4,7 +4,7 @@
         <link rel="stylesheet" type="text/css" href="main.css" />
         <script src = "d3.min.js"></script>
     </head>
-    <body onload='init()'>
+    <body>
         <!-- Navigation Bar -->
         <div class="navbar">
             <div class="container">
@@ -19,7 +19,7 @@
 
         <!-- Webpage Content -->
         <div class="sections">
-            <div id="chart" class="chart">
+            <div id="chart" class="chart" onload='init()'>
                 <svg width=1000 height=600></svg>
                 <script>
                     async function init() {
