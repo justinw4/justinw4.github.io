@@ -34,25 +34,17 @@
                         console.log("Column Headers", data.columns);
 
                         var svg = d3.select("div#chart").append("svg").attr("width", width).attr("height", height).attr("transform","translate("+margin+","+margin+")"); 
-                        var x = d3.scaleTime().domain([1985, 2020]).range([0,width]);
+                        var x = d3.scaleLinear().domain([1985, 2020]).range([0,width]);
                         var y = d3.scaleLinear().domain([1000, 7000]).range([height,0]); 
 
                         // Set up the Lines
-                        var lineAL = d3.line()
-                                    .x(function(d) { return x(d.Year); })
-                                    .y(function(d) { return y(d.AmericanLeague); }); 
-
-                        var lineNL = d3.line()
-                                    .x(function(d) { return x(d.Year); })
-                                    .y(function(d) { return y(d.NationalLeague); });
-                        
-                        var lineTotal = d3.line()
-                                    .x(function(d) { return x(d.Year); })
-                                    .y(function(d) { return y(d.Total); });
+                        const lineAL = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.AmericanLeague); }); 
+                        const lineNL = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.NationalLeague); });
+                        const lineTotal = d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.Total); });
 
                         // Set up the Axis
-                        var xAxis = d3.axisBottom(x).tickValues([1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020]).tickFormat(d3.format("~s"));
-                        var yAxis = d3.axisLeft(y).tickValues([1000, 2000, 3000, 4000, 5000, 6000, 7000]).tickFormat(d3.format("~s")); 
+                        var xAxis = d3.axisBottom(x).tickValues([1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020]).tickFormat(d3.format("%f"));
+                        var yAxis = d3.axisLeft(y).tickValues([1000, 2000, 3000, 4000, 5000, 6000, 7000]).tickFormat(d3.format("%f")); 
                         d3.select("svg").append("g")
                             .attr("class", "axis")
                             .attr("transform","translate("+margin+","+margin+")")
