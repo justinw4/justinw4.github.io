@@ -28,7 +28,7 @@
                     var width = 900;
                     var height = 500; 
                     
-                    console.log("Start v1.55");
+                    console.log("Start v1.56");
 
                     var x = d3.scaleTime().domain([1985,2020]).range([0, width]);
                     var y = d3.scaleLinear().domain([0,7000]).range([height, 0]);
@@ -38,7 +38,7 @@
 
                     d3.csv("Homeruns.csv").then(function(data) {
 
-                        svg.append("path").datum(data).attr("class", "line").attr("d", lineTotal);
+                        svg.append("path").datum([data]).attr("class", "line").attr("d", lineTotal);
 
                         svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x));
                         svg.append("g").call(d3.axisLeft(y));
