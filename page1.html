@@ -29,7 +29,7 @@
                             var width = 1000 - (2 * margin);
                             var height = 600 - (2 * margin); 
                             
-                            console.log("Start v1.31");
+                            console.log("Start v1.32");
 
                             // Setup the data
                             const data = d3.csv("HomerunStats.csv", function(d) { return { date : d.Year, value : d.Total }; }); 
@@ -37,7 +37,7 @@
                             
                             var svg = d3.select("div#chart").append("svg").attr("width", width).attr("height", height).attr("transform","translate("+margin+","+margin+")"); 
 
-                            var x = d3.scaleTime().domain(d3.extent(data, function(d) { return d.Year; })).range([0,width]);
+                            var x = d3.scaleTime().domain(d3.extent(data, function(d) { return d.date; })).range([0,width]);
                             var y = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.value; })]).range([height,0]); 
 
                             // Set up the Axis
@@ -62,9 +62,9 @@
                             // svg.append("line").datum(data).attr("fill", "none").attr("stroke","red").attr("stroke-width", 1.5).attr("d", function() { return lineAL; });
                             // svg.append("line").datum(data).attr("fill", "none").attr("stroke","blue").attr("stroke-width", 1.5).attr("d", function() { return lineNL; });
                             svg.append("line").datum(data).attr("fill", "none").attr("stroke","black").attr("stroke-width", 1.5)
-                                .attr("d", function() { return d3.line().x(function(d) { return x(d.date); }).y(function(d) { return y(d.value); }); });
+                                .attr("d", function() { return d3.line().xAxis(function(d) { return x(d.date); }).yAxis(function(d) { return y(d.value); }); });
 
-                            console.log("Done v1.31");
+                            console.log("Done v1.32");
                         }
                     </script>
                 </body>
