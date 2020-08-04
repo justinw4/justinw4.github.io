@@ -20,7 +20,7 @@
         <!-- Webpage Content -->
         <div class="sections">
             <div class="homerun-chart">
-                <svg id="chart" width=1100 height=600></svg>
+                <svg id="chart" width=1200 height=700></svg>
                 <style> .circle:hover { stroke: black; fill: black; } </style>
                 <script>
                     // Initialize Variables
@@ -37,8 +37,8 @@
                     var yAxis = d3.axisLeft(y).tickValues([0,1000,2000,3000,4000,5000,6000,7000]).tickFormat(d3.format(".4r"));
 
                     // Draw Axis
-                    d3.select("svg").append("g").call(yAxis); 
-                    d3.select("svg").append("g").attr("transform","translate(0,"+height+")").call(xAxis); 
+                    d3.select("svg").append("g").attr("transform","translate("+margin+","+margin+")").call(yAxis); 
+                    d3.select("svg").append("g").attr("transform","translate("+margin+","+(height+margin)+")").call(xAxis); 
 
                     // div for Tooltip
                     var div = d3.select("body").append("div")	
@@ -61,7 +61,7 @@
                                 div.transition()		
                                     .duration(100)		
                                     .style("opacity", 1);		
-                                div.html("Yr:" + d.Year + "<br/>" + "HRs: " + d.Homeruns)	
+                                div.html("Yr: " + d.Year + "<br/>" + "HRs: " + d.Homeruns)	
                                     .style("left", (d3.event.pageX) + "px")		
                                     .style("top", (d3.event.pageY - 28) + "px");	
                                 })					
