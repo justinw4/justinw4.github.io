@@ -23,7 +23,7 @@
                 <svg id="chart" width=1100 height=700></svg>
                 <script>
                     // Initialize Variables
-                    var margin = {top: 60, right: 10, bottom: 60, top: 50};
+                    var margin = {left: 60, right: 10, bottom: 60, top: 50};
                     var width = 1100 - margin.left - margin.right;
                     var height = 700 - margin.top - margin.bottom; 
                     
@@ -37,15 +37,15 @@
                     var yAxis = d3.axisLeft(y).tickValues([0,1000,2000,3000,4000,5000,6000,7000]).tickFormat(d3.format(".4r"));
 
                     // Draw Axis and Labels
-                    svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin / 2)).attr("text-anchor", "middle").style("font-size", "24px") 
+                    svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 2)).attr("text-anchor", "middle").style("font-size", "24px") 
                             .style("text-decoration", "bold").text("# of Homeruns vs Year Graph");
 
                     d3.select("svg").append("g").call(yAxis); 
-                    svg.append("text").attr("transform", "rotate(-90)").attr("y", 0 - margin).attr("x",0 - (height / 2))
+                    svg.append("text").attr("transform", "rotate(-90)").attr("y", 0 - margin.left).attr("x",0 - (height / 2))
                             .attr("dy", "1em").style("text-anchor", "middle").text("# of Homeruns"); 
 
                     d3.select("svg").append("g").attr("transform","translate(0,"+height+")").call(xAxis);
-                    svg.append("text").attr("x", width/2).attr("y", height+margin).style("text-anchor", "middle").text("Year"); 
+                    svg.append("text").attr("x", width/2).attr("y", height+margin.bottom).style("text-anchor", "middle").text("Year"); 
                         
 
                     // div for Tooltip
