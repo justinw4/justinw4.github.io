@@ -19,13 +19,75 @@
 
         <!-- Webpage Content -->
         <div class="sections">
-            <div class="chart">
+            <div class="homerun-chart">
+                <svg id="chart" width=1000 height=700></svg>
+                <script>
+                    // Initialize Variables
+                    var margin = {left: 60, right: 10, bottom: 60, top: 50};
+                    var width = 1000 - margin.left - margin.right;
+                    var height = 700 - margin.top - margin.bottom; 
+                    
+                    var svg = d3.select("svg#chart").append("svg").attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate("+margin.left+","+margin.top+")"); 
+                    
+                    var x = d3.scaleLinear().domain([1985,2020]).range([0,width]);
+                    var y = d3.scaleLinear().domain([.240,.280]).range([height,0]); 
 
+                    var xAxis = d3.axisBottom(x).tickValues([1985,1990,1995,2000,2005,2010,2015,2020]).tickFormat(d3.format(".4r"));
+                    var yAxis = d3.axisLeft(y).tickValues([.240,.245,.250,.255,.260,.265,.270,.275,.280]).tickFormat(d3.format(".4r"));
+
+                    // Draw Axis and Labels
+                    svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 2)).attr("text-anchor", "middle").style("font-size", "24px") 
+                            .style("text-decoration", "bold").text("Batting Average vs Year Graph");
+
+                    d3.select("svg").append("g").attr("transform","translate("+margin.left+","+margin.top+")").call(yAxis); 
+                    svg.append("text").attr("transform", "rotate(-90)").attr("y", 0 - margin.left).attr("x",0 - (height / 2))
+                            .attr("dy", "1em").style("text-anchor", "middle").text("Batting Average"); 
+
+                    d3.select("svg").append("g").attr("transform","translate("+margin.left+","+height+")").call(xAxis);
+                    svg.append("text").attr("x", width/2).attr("y", height+(margin.bottom/2)).style("text-anchor", "middle").text("Year"); 
+                        
+
+                    // div for Tooltip
+                    var div = d3.select("body").append("div")	
+                        .attr("class", "tooltip")				
+                        .style("opacity", 0);
+
+                    // Data
+                    d3.csv("StrikeoutStats.csv").then(function(data) {
+                        // Line
+                        svg.append("path").datum(data).attr("class","line").attr("fill","none").attr("stroke","lightsalmon").attr("stroke-width",2)
+                            .attr("d",d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.Average); })); 
+                        
+                        // Individual data points
+                        svg.append("g").selectAll("dot").data(data).enter().append("circle")
+                            .attr("cx", function(d) { return x(d.Year) })
+                            .attr("cy", function(d) { return y(d.Average) })
+                            .attr("r", 5)
+                            .attr("stroke","lightsalmon").attr("fill","lightsalmon")
+                            .on("mouseover", function(d) {	
+                                d3.select(this).attr("stroke","black").attr("fill","black"); 	
+                                div.transition()		
+                                    .duration(100)		
+                                    .style("opacity", 1);		
+                                div.html("Yr: " + d.Year + "<br/>" + "Avg: " + d.Average)	
+                                    .style("left", (d3.event.pageX) + "px")		
+                                    .style("top", (d3.event.pageY - 28) + "px");	
+                                })					
+                            .on("mouseout", function(d) {		
+                                d3.selectAll("circle").attr("stroke","lightsalmon").attr("fill","lightsalmon");
+                                div.transition()		
+                                    .duration(300)		
+                                    .style("opacity", 0);
+                            }); 
+                    });
+                </script>  
             </div>
 
             <div class="annotation">
-                <h1>Page 3</h1>
+                <h1>Batting Averages</h1>
+                <p></p>
             </div>
-        </div>
+        </div>  
     </body>
 </html>

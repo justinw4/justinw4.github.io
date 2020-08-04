@@ -20,11 +20,11 @@
         <!-- Webpage Content -->
         <div class="sections">
             <div class="homerun-chart">
-                <svg id="chart" width=1100 height=700></svg>
+                <svg id="chart" width=1000 height=700></svg>
                 <script>
                     // Initialize Variables
                     var margin = {left: 60, right: 10, bottom: 60, top: 50};
-                    var width = 1100 - margin.left - margin.right;
+                    var width = 1000 - margin.left - margin.right;
                     var height = 700 - margin.top - margin.bottom; 
                     
                     var svg = d3.select("svg#chart").append("svg").attr("width", width + margin.left + margin.right)
