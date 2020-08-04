@@ -60,7 +60,19 @@ html {
     padding-top: 100px;
     display: grid;
     grid-template-columns: 60% 40%;
-    z-index: 1; 
+}
+
+div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    width: 60px;					
+    height: 28px;					
+    padding: 2px;				
+    font: 12px sans-serif;		
+    background: lightsteelblue;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;			
 }
 
 .annotation {
