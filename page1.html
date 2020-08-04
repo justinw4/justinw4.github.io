@@ -21,7 +21,7 @@
         <div class="sections">
             <div class="homerun-chart">
                 <svg id="chart" width=1100 height=600></svg>
-                <style> .myCircle:hover { stroke: black; fill: black; } </style>
+                <style> .circle:hover { stroke: black; fill: black; } </style>
                 <script>
                     // Initialize Variables
                     var margin = 60;
@@ -37,8 +37,8 @@
                     var yAxis = d3.axisLeft(y).tickValues([0,1000,2000,3000,4000,5000,6000,7000]).tickFormat(d3.format(".4r"));
 
                     // Draw Axis
-                    d3.select("svg").append("g").attr("transform","translate("+margin+","+margin+")").call(yAxis); 
-                    d3.select("svg").append("g").attr("transform","translate("+margin+","+(height+margin)+")").call(xAxis); 
+                    d3.select("svg").append("g").call(yAxis); 
+                    d3.select("svg").append("g").attr("transform","translate(0,"+height+")").call(xAxis); 
 
                     // div for Tooltip
                     var div = d3.select("body").append("div")	
@@ -59,15 +59,15 @@
                             .attr("stroke","lightcoral").attr("fill","lightcoral")
                             .on("mouseover", function(d) {		
                                 div.transition()		
-                                    .duration(200)		
-                                    .style("opacity", .9);		
-                                div.html(d.Year + "<br/>"  + d.Homeruns)	
+                                    .duration(100)		
+                                    .style("opacity", 1);		
+                                div.html("Yr:" + d.Year + "<br/>" + "HRs: " + d.Homeruns)	
                                     .style("left", (d3.event.pageX) + "px")		
                                     .style("top", (d3.event.pageY - 28) + "px");	
                                 })					
                             .on("mouseout", function(d) {		
                                 div.transition()		
-                                    .duration(500)		
+                                    .duration(300)		
                                     .style("opacity", 0);
                             }); 
 
