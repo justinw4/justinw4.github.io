@@ -30,10 +30,10 @@
                     var svg = d3.select("svg#chart").append("svg").attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate("+margin.left+","+margin.top+")"); 
                     
-                    var x = d3.scaleLinear().domain([1985,2020]).range([0,width]);
+                    var x = d3.scaleLinear().domain([1985,2019]).range([0,width]);
                     var y = d3.scaleLinear().domain([15000,45000]).range([height,0]); 
 
-                    var xAxis = d3.axisBottom(x).tickValues([1985,1990,1995,2000,2005,2010,2015,2020]).tickFormat(d3.format(".4r"));
+                    var xAxis = d3.axisBottom(x).tickValues([1985,1990,1995,2000,2005,2010,2015,2019]).tickFormat(d3.format(".4r"));
                     var yAxis = d3.axisLeft(y).tickValues([15000,20000,25000,30000,35000,40000,45000]).tickFormat(d3.format(".5r"));
 
                     // Draw Axis and Labels
