@@ -40,12 +40,12 @@
                     svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 2)).attr("text-anchor", "middle").style("font-size", "24px") 
                             .style("text-decoration", "bold").text("# of Homeruns vs Year Graph");
 
-                    d3.select("svg").append("g").call(yAxis); 
+                    d3.select("svg").append("g").attr("transform","translate("+margin.left+","+margin.top+")").call(yAxis); 
                     svg.append("text").attr("transform", "rotate(-90)").attr("y", 0 - margin.left).attr("x",0 - (height / 2))
                             .attr("dy", "1em").style("text-anchor", "middle").text("# of Homeruns"); 
 
-                    d3.select("svg").append("g").attr("transform","translate(0,"+height+")").call(xAxis);
-                    svg.append("text").attr("x", width/2).attr("y", height+margin.bottom).style("text-anchor", "middle").text("Year"); 
+                    d3.select("svg").append("g").attr("transform","translate("+margin.left+","+height+margin.top+")").call(xAxis);
+                    svg.append("text").attr("x", width/2).attr("y", height+(margin.bottom/2)).style("text-anchor", "middle").text("Year"); 
                         
 
                     // div for Tooltip
