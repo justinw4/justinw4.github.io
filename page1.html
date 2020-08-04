@@ -21,7 +21,6 @@
         <div class="sections">
             <div class="homerun-chart">
                 <svg id="chart" width=1200 height=700></svg>
-                <style> .circle:hover { stroke: black; fill: black; } </style>
                 <script>
                     // Initialize Variables
                     var margin = 60;
@@ -36,9 +35,16 @@
                     var xAxis = d3.axisBottom(x).tickValues([1985,1990,1995,2000,2005,2010,2015,2020]).tickFormat(d3.format(".4r"));
                     var yAxis = d3.axisLeft(y).tickValues([0,1000,2000,3000,4000,5000,6000,7000]).tickFormat(d3.format(".4r"));
 
-                    // Draw Axis
+                    // Draw Axis and Labels
+                    svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin / 2)).attr("text-anchor", "middle").style("font-size", "24px") 
+                            .style("text-decoration", "bold").text("# of Homeruns vs Year Graph");
+
                     d3.select("svg").append("g").attr("transform","translate("+margin+","+margin+")").call(yAxis); 
+                    svg.append("text").attr("x", width/2).attr("y", height+margin+20).style("text-anchor", "middle").text("Year");
+                    
                     d3.select("svg").append("g").attr("transform","translate("+margin+","+(height+margin)+")").call(xAxis); 
+                    svg.append("text").attr("transform", "rotate(-90)").attr("y", 0 - margin).attr("x",0 - (height / 2))
+                            .attr("dy", "1em").style("text-anchor", "middle").text("# of Homeruns"); 
 
                     // div for Tooltip
                     var div = d3.select("body").append("div")	
@@ -72,25 +78,13 @@
                                     .duration(300)		
                                     .style("opacity", 0);
                             }); 
-
-
-                        // Add title and labels to x axis and y axis
-                        svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin / 2)).attr("text-anchor", "middle").style("font-size", "24px") 
-                            .style("text-decoration", "bold").text("# of Homeruns vs Year Graph");
-
-                        svg.append("text").attr("y", height+margin).attr("x", width/2).style("text-anchor", "middle").text("Year");
-
-                        svg.append("text").attr("transform", "rotate(-90)").attr("y", 0 - margin).attr("x",0 - (height / 2))
-                            .attr("dy", "1em").style("text-anchor", "middle").text("# of Homeruns"); 
-
                     });
-
-                    console.log("fixed 4");
                 </script>  
             </div>
 
             <div class="annotation">
                 <h1>Homeruns</h1>
+                <p></p>
             </div>
         </div>  
     </body>
