@@ -54,7 +54,7 @@
                         .style("opacity", 0);
 
                     // Data
-                    d3.csv("StrikeoutStats.csv").then(function(data) {
+                    d3.csv("BattingAverages.csv").then(function(data) {
                         // Line
                         svg.append("path").datum(data).attr("class","line").attr("fill","none").attr("stroke","lightsalmon").attr("stroke-width",2)
                             .attr("d",d3.line().x(function(d) { return x(d.Year); }).y(function(d) { return y(d.Average); })); 
