@@ -71,7 +71,8 @@ html {
     display: block; 
     text-align: center;
     background-color: lightsalmon; 
-    font-size: 32px;
+    font-size: 24px;
+    padding: 10px 10px;
 }
 
 #giancarlo {
