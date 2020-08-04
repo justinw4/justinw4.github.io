@@ -69,7 +69,9 @@ html {
 
 .intro-text {
     display: block; 
+    text-align: center;
     background-color: lightsalmon; 
+    font-size: 36px;
 }
 
 #giancarlo {
