@@ -58,7 +58,7 @@
                             .attr("r", 5)
                             .attr("stroke","lightcoral").attr("fill","lightcoral")
                             .on("mouseover", function(d) {	
-                                d3.selectAll("circle").attr("stroke","black").attr("fill","black"); 	
+                                d3.select(this).attr("stroke","black").attr("fill","black"); 	
                                 div.transition()		
                                     .duration(100)		
                                     .style("opacity", 1);		
