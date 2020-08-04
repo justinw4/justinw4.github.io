@@ -56,6 +56,29 @@ html {
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
 
+.intro {
+    padding-top: 80px;
+    display: grid;
+    grid-template-columns: 33% 34% 33%; 
+}
+
+#barry {
+    width: 100%;
+    height: auto; 
+}
+
+.intro-text {
+    display: block; 
+    background-color: lightsalmon; 
+}
+
+#giancarlo {
+    width: 100%;
+    height: auto;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------- */
+
 .sections {
     padding-top: 100px;
     display: grid;
